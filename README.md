@@ -5,12 +5,15 @@ AWS Lambda is a serveless computing plataform that allows the development of any
 
 ### AWS Lambda Anatomy
 
-* Handler
+* **Handler**
+
 The handler is the entry point for the lambda. A lambda function accepts JSON formatted input
 
-* Runtime Environment 
+* **Runtime Environment** 
+
 A lambda funcition need to have a runtime environment configured
 
-* Trigger
+* **Trigger**
+
 The invocation of a lambda function must be the response to an event (respond to requests AWS API Gateway)
 
