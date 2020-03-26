@@ -1,5 +1,7 @@
 # Mobile-Info-Store-AWSLambda-Kotlin
 
+![Lambda Ilustration](resources/lambda-architecture.png)
+
 ## What Is AWS Lambda
 AWS Lambda is a serveless computing plataform that allows the development of any type of application or backend service without the need to provision servers.
 
