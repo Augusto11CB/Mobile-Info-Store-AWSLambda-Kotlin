@@ -14,9 +14,9 @@ dependencies {
     implementation("com.amazonaws:aws-java-sdk-dynamodb:1.11.751")
     implementation("com.amazonaws:aws-lambda-java-events:2.2.6")
     implementation("com.amazonaws:aws-lambda-java-core:1.2.0")
-    implementation("com.fasterxml.jackson.core:jackson-core:2.10.3")
+//    implementation("com.fasterxml.jackson.core:jackson-core:2.10.3")
     implementation(kotlin("stdlib-jdk8"))
-    testCompile("junit", "junit", "4.12")
+//    testCompile("junit", "junit", "4.12")
 }
 
 configure<JavaPluginConvention> {
