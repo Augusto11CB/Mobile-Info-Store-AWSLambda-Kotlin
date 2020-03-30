@@ -6,7 +6,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig
 
-class DynamoDBUtils private constructor() {
+class DynamoDBUtil private constructor() {
 
     //"Where we specify where de database is"
     private val dynamoDBClient: AmazonDynamoDB? = AmazonDynamoDBClientBuilder.standard()
@@ -26,12 +26,12 @@ class DynamoDBUtils private constructor() {
 
 
     companion object {
-        private var db_adapter: DynamoDBUtils? = null
+        private var db_adapter: DynamoDBUtil? = null
 
-        val instance: DynamoDBUtils?
+        val instance: DynamoDBUtil?
             get() {
                 if (db_adapter == null)
-                    db_adapter = DynamoDBUtils()
+                    db_adapter = DynamoDBUtil()
 
                 return db_adapter
             }
