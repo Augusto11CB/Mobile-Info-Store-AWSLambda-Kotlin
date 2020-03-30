@@ -8,14 +8,14 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig
 
 class DynamoDBUtils private constructor() {
 
-    //"Where de database is"
+    //"Where we specify where de database is"
     private val dynamoDBClient: AmazonDynamoDB? = AmazonDynamoDBClientBuilder.standard()
         .withRegion(Regions.US_EAST_1)
         .build()
 
     private var dynamoDBMapper: DynamoDBMapper? = null
 
-                                        // Information of the database needed to be connect
+                                        //Where we pass as parameter the information of the database needed to be connect
     fun createDbMapper(mapperConfig: DynamoDBMapperConfig): DynamoDBMapper? {
 
         if (this.dynamoDBClient != null)
