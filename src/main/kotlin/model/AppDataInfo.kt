@@ -11,7 +11,7 @@ data class AppDataInfo(
 
     var so: String? = null,
 
-    var appVersion: String? = null,
+    var version: String? = null,
 
     var environment: String? = null,
 
@@ -28,12 +28,9 @@ data class AppDataInfo(
         val MOBILE_VERSIONING_TABLE = System.getenv("MOBILE_VERSIONING_TABLE")
         const val ID = "id"
         const val ENVIRONMENT = "environment"
-        const val APP_VERSION = "appVersion"
+        const val VERSION = "version"
         const val SO = "so"
     }
 
 }
 
-fun AppDataInfo.updateVersion(){
-
-}
