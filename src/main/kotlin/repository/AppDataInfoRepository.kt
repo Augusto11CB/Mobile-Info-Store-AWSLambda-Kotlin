@@ -4,7 +4,7 @@ import model.AppDataInfo
 
 interface AppDataInfoRepository {
 
-    fun insert(appDataInfo: AppDataInfo)
+    fun save(appDataInfo: AppDataInfo)
 
     fun updateAppData(id: String, version: String)
 

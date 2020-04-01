@@ -41,6 +41,9 @@ class VersionManager(private val appDataInfoRepoRepository: AppDataInfoRepositor
                 }
 
             }
+
+            appDataInfoRepoRepository.save(userAppDataInfo)
+
         }
 
         throw InvalidParameterException("Invalid user-agent")
@@ -81,7 +84,7 @@ class VersionManager(private val appDataInfoRepoRepository: AppDataInfoRepositor
 
         if (x.size > 1) {
             return Pair(x[0], x[1])
-        } else if (x.contains("com.")) { //TODO change for bk
+        } else if (x.contains("com.")) { //TODO change for BK
             return Pair(AppDataInfo.ENVIRONMENT, this.split("(").last())
         }
 
