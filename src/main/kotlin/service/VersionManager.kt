@@ -18,7 +18,7 @@ class VersionManager(private val appDataInfoRepoRepository: AppDataInfoRepositor
             val userAppDataInfo = this.extractAppDataInfo(it)
 
             val appDataInfo =
-                appDataInfoRepoRepository.getBySOAndEnvironment(userAppDataInfo.so!!, userAppDataInfo.environment!!)
+                appDataInfoRepoRepository.findBySOAndEnvironment(userAppDataInfo.so!!, userAppDataInfo.environment!!)
 
 
             appDataInfo?.let {
@@ -51,12 +51,12 @@ class VersionManager(private val appDataInfoRepoRepository: AppDataInfoRepositor
 
     private fun extractAppDataInfo(userAgent: String): AppDataInfo {
 //        "XYAISUA (com.com.br.com.com; version:1.0.0; SO:iOS 13.3.1; Device: iPhone 8; uuid: IUE-83723-A82SH)"
-//        "XYAISUA (com.com.br.com.com; version:1.0.0; SO:Android 13.3.1; Device: iPhone 8; uuid: IUE-83723-A82SH)"
+//        "XYAISUA (com.com.br.com.com; version:1.0.0; SO:Android 13.3.1; Device: Motorola XI; uuid: IUE-83938-432SH)"
 
         // 1. split string in ";"
         // 2. lock for version and SO
-        //3 split string in ":"
-        //4. store verison and make if (contains(android/ios))
+        // 3 split string in ":"
+        // 4. store verison and make if (contains(android/ios))
 
         val userAgentSeparatedInfo = userAgent.split(";")
         var appDataInfo = AppDataInfo()
@@ -74,7 +74,6 @@ class VersionManager(private val appDataInfoRepoRepository: AppDataInfoRepositor
                 }
             }
 
-//        return appVersionAndSO.toMap()
         return AppDataInfo()
 
     }
