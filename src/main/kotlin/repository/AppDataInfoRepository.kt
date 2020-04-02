@@ -8,10 +8,6 @@ interface AppDataInfoRepository {
 
     fun updateAppData(id: String, version: String)
 
-    fun getAll(): List<AppDataInfo>
-
-    fun getBySOAndEnvironment(so: String, environment: String): AppDataInfo?
-
-    fun delete(sku: String): AppDataInfo
+    fun findBySOAndEnvironment(so: String, environment: String): AppDataInfo?
 
 }
