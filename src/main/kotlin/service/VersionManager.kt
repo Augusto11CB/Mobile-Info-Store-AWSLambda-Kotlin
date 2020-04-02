@@ -23,7 +23,7 @@ class VersionManager(private val appDataInfoRepoRepository: AppDataInfoRepositor
 
             appDataInfo?.let {
 
-                if (VersionComparatorUtil.compareVersion(appDataInfo.version!!, userAppDataInfo.version!!) > 0) {
+                if (VersionComparatorUtil.compareVersion(userAppDataInfo.version!!, appDataInfo.version!!) > 0) {
 
                     appDataInfoRepoRepository.updateAppData(appDataInfo.id, userAppDataInfo.version!!)
 
@@ -32,18 +32,18 @@ class VersionManager(private val appDataInfoRepoRepository: AppDataInfoRepositor
                         userAppDataInfo.version!!,
                         StatusAppVersionEnum.LATEST_VERSION
                     )
+
                 } else {
+
                     return AppDataInfoDTO(
                         userAppDataInfo.version!!,
                         appDataInfo.version!!,
                         StatusAppVersionEnum.OUT_OF_DATE_VERSION
                     )
                 }
-
             }
 
             appDataInfoRepoRepository.save(userAppDataInfo)
-
         }
 
         throw InvalidParameterException("Invalid user-agent")
@@ -62,8 +62,8 @@ class VersionManager(private val appDataInfoRepoRepository: AppDataInfoRepositor
         var appDataInfo = AppDataInfo()
 
         val listAppVersionAndSO = userAgentSeparatedInfo
-            .filter {
-                filterSOandAppVersion(it)
+            .filter { result ->
+                filterSOandAppVersion(result)
             }.map {
                 it.getPair()
             }.forEach {
@@ -74,17 +74,20 @@ class VersionManager(private val appDataInfoRepoRepository: AppDataInfoRepositor
                 }
             }
 
-        return AppDataInfo()
+        return appDataInfo
 
     }
 
     fun String.getPair(): Pair<String, String> {
-        val x = this.split(":")
 
+        var x = this.split(":")
+        
         if (x.size > 1) {
-            return Pair(x[0], x[1])
-        } else if (x.contains("com.")) { //TODO change for BK
-            return Pair(AppDataInfo.ENVIRONMENT, this.split("(").last())
+            return Pair(x[0].trim(), x[1].trim())
+        } else { //TODO change for BK
+            x = this.split("(")
+
+            if (x.last().contains("com.")) return Pair(AppDataInfo.ENVIRONMENT, x.last())
         }
 
         throw InvalidAttributeValueException("user-agent wrong format")
