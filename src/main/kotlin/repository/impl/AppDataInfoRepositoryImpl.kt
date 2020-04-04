@@ -3,6 +3,7 @@ package repository.impl
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression
 import com.amazonaws.services.dynamodbv2.model.AttributeValue
 import model.AppDataInfo
 import repository.AppDataInfoRepository
@@ -45,12 +46,21 @@ class AppDataInfoRepositoryImpl : AppDataInfoRepository {
         params[":so"] = AttributeValue().withS(so)
         params[":environment"] = AttributeValue().withS(environment)
 
-        val queryExp = DynamoDBQueryExpression<AppDataInfo>()
+/*      val queryExp = DynamoDBQueryExpression<AppDataInfo>()
             .withKeyConditionExpression("so = :so")
             .withKeyConditionExpression("environment = :environment")
             .withExpressionAttributeValues(params)
 
         val result = dbMapper.query(AppDataInfo::class.java, queryExp)
+
+*/
+
+        val queryExp = DynamoDBScanExpression()
+            .withFilterExpression("so = :so and environment = :environment")
+            .withExpressionAttributeValues(params)
+
+        val result = dbMapper.scan(AppDataInfo::class.java, queryExp)
+
 
         if (result.size > 0) {
             appDataInfo = result[0]
