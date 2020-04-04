@@ -3,14 +3,16 @@ package model.dto
 import com.google.gson.Gson
 import enum.StatusAppVersionEnum
 
-class AppDataInfoDTO(
+data class AppDataInfoRequestDTO(val userAgent:String = "")
+
+data class AppDataInfoResponseDTO(
 
     val currentAppVersion: String,
     val latestAppVersion: String,
     val statusAppVersionEnum: StatusAppVersionEnum
 )
 
-fun AppDataInfoDTO.toJSON(): String {
+fun AppDataInfoResponseDTO.toJSON(): String {
     val gson = Gson()
 
     return gson.toJson(this)

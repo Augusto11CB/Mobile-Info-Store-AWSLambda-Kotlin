@@ -1,5 +1,5 @@
 package response
 
-import model.dto.AppDataInfoDTO
+import model.dto.AppDataInfoResponseDTO
 
-data class StatusAppVersionResponse(val appDataInfoDTO: AppDataInfoDTO) : GenericResponse()
+data class StatusAppVersionResponse(val appDataInfoDTO: AppDataInfoResponseDTO) : GenericResponse()

@@ -2,7 +2,7 @@ package service
 
 import enum.StatusAppVersionEnum
 import model.AppDataInfo
-import model.dto.AppDataInfoDTO
+import model.dto.AppDataInfoResponseDTO
 import repository.AppDataInfoRepository
 import utils.VersionComparatorUtil
 import java.security.InvalidParameterException
@@ -10,7 +10,7 @@ import javax.management.InvalidAttributeValueException
 
 class VersionManager(private val appDataInfoRepoRepository: AppDataInfoRepository) {
 
-    fun verifyAppVersion(userAgent: String?): AppDataInfoDTO {
+    fun verifyAppVersion(userAgent: String?): AppDataInfoResponseDTO {
 
 
         userAgent?.let { it ->
@@ -25,9 +25,9 @@ class VersionManager(private val appDataInfoRepoRepository: AppDataInfoRepositor
 
                 if (VersionComparatorUtil.compareVersion(userAppDataInfo.version!!, appDataInfo.version!!) > 0) {
 
-                    appDataInfoRepoRepository.updateAppData(appDataInfo.id, userAppDataInfo.version!!)
+                    appDataInfoRepoRepository.updateAppData(appDataInfo.getId()!!, userAppDataInfo.version!!)
 
-                    return AppDataInfoDTO(
+                    return AppDataInfoResponseDTO(
                         userAppDataInfo.version!!,
                         userAppDataInfo.version!!,
                         StatusAppVersionEnum.LATEST_VERSION
@@ -35,7 +35,7 @@ class VersionManager(private val appDataInfoRepoRepository: AppDataInfoRepositor
 
                 } else {
 
-                    return AppDataInfoDTO(
+                    return AppDataInfoResponseDTO(
                         userAppDataInfo.version!!,
                         appDataInfo.version!!,
                         StatusAppVersionEnum.OUT_OF_DATE_VERSION
