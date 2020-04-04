@@ -1,6 +1,7 @@
 plugins {
     java
     kotlin("jvm") version "1.3.61"
+    id("com.github.johnrengelman.shadow") version "5.2.0" //Gradle plugin for collapsing all dependencies and project code into a single Jar file
 }
 
 group = "org.example"
